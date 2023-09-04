@@ -1,0 +1,132 @@
+﻿@page "/EmployeeManagement"
+@using SalesManagementApp.Entities;
+@using SalesManagementApp.Models;
+@using SalesManagementApp.Services.Contracts;
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Spinner
+
+@inject IEmployeeManagementService EmployeeManagementService
+
+<h3 class="mb-4">Employee Management</h3>
+
+<div style="max-width:1100px"> 
+     <SfGrid DataSource="employeeData" Toolbar="@toolbar">
+         <GridEditSettings AllowEditing="true" AllowAdding="true" AllowDeleting="true"></GridEditSettings>
+         <GridEvents OnActionBegin="ActionBeginHandler" TValue="EmployeeModel"> </GridEvents>
+         <GridColumns>
+         <GridColumn IsPrimaryKey="true" Field="@nameof(EmployeeModel.Id)" Width="50px"></GridColumn>
+         <GridColumn HeaderText="Profile" Width="120px">
+             <Template>
+                 @{
+                   var employee = (context as EmployeeModel);
+                   <div class=" profile-image-container">
+                   <img src="@(employee?.ImagePath)"/>
+                   </div>
+                 }
+             </Template>
+         </GridColumn>
+         <GridColumn HeaderText="First Name" Field="@nameof(EmployeeModel.FirstName)" Width="120px"></GridColumn>
+         <GridColumn HeaderText="Last Name" Field="@nameof(EmployeeModel.LastName)" Width="120px"></GridColumn>
+         <GridForeignColumn HeaderText="Designation" TValue="EmployeeJobTitle" Field="@nameof(EmployeeModel.EmployeeJobTitleId)"
+                                        ForeignDataSource="employeeJobTitleData"
+                                        ForeignKeyValue="Name" Width="100px">                      
+                 <EditTemplate>
+                     <SfDropDownList @bind-value ="@((context as EmployeeModel).EmployeeJobTitleId)"
+                                               ID="EmployeeJobTitleId"
+                                               DataSource="employeeJobTitleData" TItem="EmployeeJobTitle"
+                                               TValue="int">
+
+                      <DropDownListFieldSettings Text="Name" Value="EmployeeJobTitleId">
+                      </DropDownListFieldSettings>
+
+                     </SfDropDownList>
+                 </EditTemplate>
+
+         </GridForeignColumn>
+         <GridColumn Field="@nameof(EmployeeModel.Gender)" Width="100px">
+             <EditTemplate>
+                 <SfDropDownList DataSource="genderCollection" TValue="string" TItem="string" @bind-value ="@((context as EmployeeModel).Gender)">
+                 </SfDropDownList>
+             </EditTemplate>
+             </GridColumn>
+             <GridColumn Field="@nameof(EmployeeModel.Email)" Width="170px">
+          </GridColumn>
+         
+         <GridColumn HeaderText="Date Of Birth" Field="@nameof(EmployeeModel.DateOfBirth)" Format="d"></GridColumn>
+           
+         <GridForeignColumn HeaderText="Reports To" TValue="ReportToModel" Field="@nameof(EmployeeModel.ReportToEmpId)"
+                               ForeignDataSource="reportToEmployeeData"
+                               ForeignKeyValue="ReportToName" Width="120px">
+                <EditTemplate>
+                    <SfDropDownList @bind-value="@((context as EmployeeModel).ReportToEmpId)"
+                                    ID="ReportToEmpId"
+                                    DataSource="reportToEmployeeData" TItem="ReportToModel"
+                                    TValue="Nullable<int>">
+
+                        <DropDownListFieldSettings Text="ReportToName" Value="ReportToEmpId">
+                        </DropDownListFieldSettings>
+
+                    </SfDropDownList>
+                </EditTemplate>
+
+            </GridForeignColumn>
+         @* <GridColumn HeaderText="Reports" Field="@nameof(EmployeeModel.ReportToEmpId)" Width="100px"></GridColumn> *@
+         </GridColumns>
+         <SfSpinner @bind-Visible ="@VisibleProp"> 
+
+         </SfSpinner>
+     </SfGrid>
+</div>
+<style>
+    .profile-image-container
+    {
+      width: 80px;
+      height: 80px;
+    }
+
+    .profile-image-container img
+    {
+      width: 100%;
+      height: 100%;
+      border-radius: 50px;
+    }
+
+</style>
+@code {
+
+    private enum GenderVal
+    {  
+        Male,
+        Female
+    }
+    private bool VisibleProp { get; set; } = false;
+    private string[] genderCollection = Enum.GetNames(typeof(GenderVal));
+    private List<EmployeeModel>? employeeData = null;
+    private List<EmployeeJobTitle>? employeeJobTitleData;
+    private List<ReportToModel>? reportToEmployeeData;
+    private List<object> toolbar = new List<object> {"Add", "Edit", "Delete", "Update","Cancel", "Search" };
+
+    protected override async Task OnInitializedAsync()
+    {
+        VisibleProp = true;
+        employeeData = await EmployeeManagementService.GetEmployees();
+        employeeJobTitleData = await EmployeeManagementService.GetJobTitles();
+        reportToEmployeeData = await EmployeeManagementService.GetReportToEmployees();
+
+        //simulation of latency- to show delay in retrieval
+        //await Task.Delay(2000);
+        VisibleProp = false;
+    }
+
+    public async void ActionBeginHandler(ActionEventArgs<EmployeeModel>args)
+    {
+        if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Save))
+        {
+            if(args.Action == "Add")
+            {
+                await EmployeeManagementService.AddEmployee(args.Data);
+            }
+        }
+    }
+}
