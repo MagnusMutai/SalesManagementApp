@@ -8,6 +8,8 @@ namespace SalesManagementApp.Services.Contracts
         Task<List<EmployeeModel>> GetEmployees();
         Task<List<EmployeeJobTitle>> GetJobTitles();
         Task<List<ReportToModel>> GetReportToEmployees();
-        Task<Employee> AddEmployee (EmployeeModel employee);
+        Task<Employee> AddEmployee (EmployeeModel employeeModel);
+        Task UpdateEmployee (EmployeeModel employeeModel);
+        Task DeleteEmployee (EmployeeModel employeeModel);
     }
 }

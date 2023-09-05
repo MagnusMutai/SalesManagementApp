@@ -34,6 +34,11 @@ namespace SalesManagementApp.Services
             }
         }
 
+        public Task DeleteEmployee(EmployeeModel employeeModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<EmployeeModel>> GetEmployees()
         {
             try
@@ -85,6 +90,32 @@ namespace SalesManagementApp.Services
 
                 throw;
             }      
+        }
+
+        public async Task UpdateEmployee(EmployeeModel employeeModel)
+        {
+            try
+            {
+                var employeeToUpdate = await this.salesManagementDbContext.Employees.FindAsync(employeeModel.Id);
+                if(employeeToUpdate != null)
+                {
+                    employeeToUpdate.FirstName = employeeModel.FirstName;
+                    employeeToUpdate.LastName = employeeModel.LastName;
+                    employeeToUpdate.ReportToEmpId = employeeModel.ReportToEmpId;
+                    employeeToUpdate.DateOfBirth = employeeModel.DateOfBirth;
+                    employeeToUpdate.ImagePath = employeeModel.ImagePath;
+                    employeeToUpdate.Gender = employeeModel.Gender;
+                    employeeToUpdate.Email = employeeModel.Email;
+                    employeeToUpdate.EmployeeJobTitleId = employeeModel.EmployeeJobTitleId;
+
+                    await this.salesManagementDbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

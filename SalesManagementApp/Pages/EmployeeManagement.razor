@@ -11,11 +11,11 @@
 <h3 class="mb-4">Employee Management</h3>
 
 <div style="max-width:1100px"> 
-     <SfGrid @ref="SfEmployeeGrid" DataSource="employeeData" Toolbar="@toolbar">
+     <SfGrid @ref="SfEmployeeGrid" DataSource="employeeData" AllowSorting="true" Toolbar="@toolbar">
          <GridEditSettings AllowEditing="true" AllowAdding="true" AllowDeleting="true"></GridEditSettings>
          <GridEvents OnActionBegin="ActionBeginHandler" OnActionComplete="ActionCompleteHandler" TValue="EmployeeModel"> </GridEvents>
          <GridColumns>
-         <GridColumn IsPrimaryKey="true" Field="@nameof(EmployeeModel.Id)" Width="50px"></GridColumn>
+         <GridColumn AllowAdding="false" IsPrimaryKey="true" Field="@nameof(EmployeeModel.Id)" Width="50px"></GridColumn>
          <GridColumn HeaderText="Profile" Width="120px">
              <Template>
                  @{
