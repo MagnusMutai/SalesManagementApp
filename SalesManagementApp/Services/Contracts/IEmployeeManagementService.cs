@@ -10,6 +10,6 @@ namespace SalesManagementApp.Services.Contracts
         Task<List<ReportToModel>> GetReportToEmployees();
         Task<Employee> AddEmployee (EmployeeModel employeeModel);
         Task UpdateEmployee (EmployeeModel employeeModel);
-        Task DeleteEmployee (EmployeeModel employeeModel);
+        Task DeleteEmployee (int id);
     }
 }

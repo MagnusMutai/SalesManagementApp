@@ -106,7 +106,7 @@
     private List<EmployeeModel>? employeeData = null;
     private List<EmployeeJobTitle>? employeeJobTitleData;
     private List<ReportToModel>? reportToEmployeeData;
-    private List<object> toolbar = new List<object> {"Add", "Edit", "Delete", "Update","Cancel", "Search" };
+    private List<object> toolbar = new List<object> {"Add", "Edit", "Delete", "Update","Cancel", "Search", "ExcelExport" };
 
     protected override async Task OnInitializedAsync()
     {
@@ -128,6 +128,15 @@
             {
                 await EmployeeManagementService.AddEmployee(args.Data);
             }
+            else if(args.Action == "Edit")
+            {
+                await EmployeeManagementService.UpdateEmployee(args.Data);
+
+            }
+        }
+        else if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
+        {
+            await EmployeeManagementService.DeleteEmployee(args.Data.Id);
         }
     }
 
@@ -135,8 +144,11 @@
     {
         if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Save))
         {
-            employeeData = await EmployeeManagementService.GetEmployees();
-            SfEmployeeGrid?.Refresh();
+            if (args.Action == "Add")
+            {
+                employeeData = await EmployeeManagementService.GetEmployees();
+                SfEmployeeGrid?.Refresh();
+            }
         }
     }
 }
