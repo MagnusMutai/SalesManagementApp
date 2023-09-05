@@ -34,9 +34,22 @@ namespace SalesManagementApp.Services
             }
         }
 
-        public Task DeleteEmployee(EmployeeModel employeeModel)
+        public async Task DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var employee = await this.salesManagementDbContext.Employees.FindAsync(id);
+                if(employee!=null)
+                {
+                    this.salesManagementDbContext.Employees.Remove(employee);
+                    await this.salesManagementDbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<List<EmployeeModel>> GetEmployees()
