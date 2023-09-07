@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SalesManagementApp.Data;
 using SalesManagementApp.Entities;
 using SalesManagementApp.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -38,6 +39,22 @@ namespace SalesManagementApp.Extensions
                 ImagePath= employeeModel.Gender.ToUpper()== "MALE"?"/IMAGES/Profile/MaleDefault.jpg"
                                                                   :"/IMAGES/Profile/FemaleDefault.jpg"
             };
+        }
+        public static async Task<List<ProductModel>> Convert(this IQueryable<Product> Products,
+                                                             SalesManagementDbContext context)
+        {
+            return await (from prod in Products
+                          join prodCat in context.ProductCategories
+                          on prod.CategoryId equals prodCat.Id
+                          select new ProductModel
+                          {
+                              Id = prod.Id,
+                              Name = prod.Name,
+                              Description = prod.Description,
+                              ImagePath = prod.ImagePath,
+                              CategoryId = prod.CategoryId,
+                              CategoryName = prodCat.Name
+                          }).ToListAsync();
         }
     }
 }
