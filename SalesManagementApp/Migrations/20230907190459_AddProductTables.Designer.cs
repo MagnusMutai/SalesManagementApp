@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesManagementApp.Data;
 
@@ -11,9 +12,11 @@ using SalesManagementApp.Data;
 namespace SalesManagementApp.Migrations
 {
     [DbContext(typeof(SalesManagementDbContext))]
-    partial class SalesManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230907190459_AddProductTables")]
+    partial class AddProductTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,179 +293,6 @@ namespace SalesManagementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/MountainBike1.jpg",
-                            Name = "Mountain Bike 1",
-                            Price = 200m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/MountainBike2.jpg",
-                            Name = "Mountain Bike 2",
-                            Price = 210m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/RoadBike1.jpg",
-                            Name = "Road Bike 1",
-                            Price = 240m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 2,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/RoadBike2.jpg",
-                            Name = "Road Bike 2",
-                            Price = 250m
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 2,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/RoadBike3.jpg",
-                            Name = "Road Bike 3",
-                            Price = 252m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 2,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/RoadBike4.jpg",
-                            Name = "Road Bike 4",
-                            Price = 230m
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Tent1.jpg",
-                            Name = "Tent 1",
-                            Price = 230m
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Tent2.jpg",
-                            Name = "Tent 2",
-                            Price = 230m
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Mattress1.jpg",
-                            Name = "Air Mattress 1",
-                            Price = 11m
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Mattress2.jpg",
-                            Name = "Air Mattress 2",
-                            Price = 40m
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Mattress3.jpg",
-                            Name = "Air Mattress 3",
-                            Price = 54m
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 3,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Mattress4.jpg",
-                            Name = "Air Mattress 4",
-                            Price = 15m
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CategoryId = 4,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Pack1.jpg",
-                            Name = "Pack 1",
-                            Price = 24m
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CategoryId = 4,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Pack2.jpg",
-                            Name = "Pack 2",
-                            Price = 30m
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CategoryId = 4,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Pack3.jpg",
-                            Name = "Pack 3",
-                            Price = 35m
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CategoryId = 5,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Boot1.jpg",
-                            Name = "Boot 1",
-                            Price = 20m
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CategoryId = 5,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Boot2.jpg",
-                            Name = "Boot 2",
-                            Price = 38m
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CategoryId = 5,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Boot3.jpg",
-                            Name = "Boot 3",
-                            Price = 35m
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CategoryId = 5,
-                            Description = "Lorem ipsum dolor sit amet. Qui esse quos est impedit ipsa et modi saepe in culpa quia. ",
-                            ImagePath = "/Images/Products/Boot4.jpg",
-                            Name = "Boot 4",
-                            Price = 31m
-                        });
                 });
 
             modelBuilder.Entity("SalesManagementApp.Entities.ProductCategory", b =>
@@ -480,33 +310,6 @@ namespace SalesManagementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Mountain Bikes"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Road Bikes"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Camping"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Hiking"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Boots"
-                        });
                 });
 #pragma warning restore 612, 618
         }
