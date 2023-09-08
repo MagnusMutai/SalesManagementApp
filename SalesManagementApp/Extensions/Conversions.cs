@@ -52,8 +52,29 @@ namespace SalesManagementApp.Extensions
                               Name = prod.Name,
                               Description = prod.Description,
                               ImagePath = prod.ImagePath,
+                              Price = prod.Price,
                               CategoryId = prod.CategoryId,
                               CategoryName = prodCat.Name
+                          }).ToListAsync();
+        }
+        public static async Task<List<ClientModel>> Convert(this IQueryable<Client> clients,
+                                                            SalesManagementDbContext context)
+        {
+            return await (from c in clients
+                          join r in context.RetailOutlets
+                          on c.RetailOutletId equals r.Id
+                          select new ClientModel
+                          {
+                              Id = c.Id,
+                              Email = c.Email,
+                              FirstName = c.FirstName,
+                              LastName = c.LastName,
+                              JobTitle = c.JobTitle,
+                              PhoneNumber = c.PhoneNumber,
+                              RetailOutletId = c.RetailOutletId,
+                              RetailOutletLocation = r.Location,
+                              RetailOutletName = r.Name
+
                           }).ToListAsync();
         }
     }

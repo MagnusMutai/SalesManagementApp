@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesManagementApp.Data;
 
@@ -11,9 +12,11 @@ using SalesManagementApp.Data;
 namespace SalesManagementApp.Migrations
 {
     [DbContext(typeof(SalesManagementDbContext))]
-    partial class SalesManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230908165459_AddClientTables")]
+    partial class AddClientTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,48 +59,6 @@ namespace SalesManagementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "james.tailor@company.com",
-                            FirstName = "James",
-                            JobTitle = "Buyer",
-                            LastName = "Tailor",
-                            PhoneNumber = "000000000",
-                            RetailOutletId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "jill.hutton@company.com",
-                            FirstName = "Jill",
-                            JobTitle = "Buyer",
-                            LastName = "Hutton",
-                            PhoneNumber = "000000000",
-                            RetailOutletId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Email = "craig.rice@company.com",
-                            FirstName = "Craig",
-                            JobTitle = "Buyer",
-                            LastName = "Rice",
-                            PhoneNumber = "000000000",
-                            RetailOutletId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Email = "amy.smith@company.com",
-                            FirstName = "Amy",
-                            JobTitle = "Buyer",
-                            LastName = "Smith",
-                            PhoneNumber = "000000000",
-                            RetailOutletId = 4
-                        });
                 });
 
             modelBuilder.Entity("SalesManagementApp.Entities.Employee", b =>
@@ -606,32 +567,6 @@ namespace SalesManagementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RetailOutlets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Location = "TX",
-                            Name = "Texas Outdoor Store"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Location = "CA",
-                            Name = "California Outdoor Store"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Location = "NY",
-                            Name = "New York Outdoor Store"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Location = "WA",
-                            Name = " Washington Outdoor Store"
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -21,6 +21,8 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSyncfusionBlazor();
 
 builder.Services.AddScoped<IEmployeeManagementService, EmployeeManagementService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
 var app = builder.Build();
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY1NTQxMUAzMjMyMmUzMDJlMzBaMXI4MFEyWDZ2SjZtcE5tZFZjTC9ldjlZREpOTFJKR1F3U3JmQm43S3VrPQ==");
