@@ -19,17 +19,21 @@ namespace SalesManagementApp.Services
             {
                 Order order = new Order
                 {
-                    OrderDateTime = orderModel.OrderDateTime,
+                    OrderDateTime = DateTime.Now,
                     ClientId = orderModel.ClientId,
                     EmployeeId = 9,
-                    Price = orderModel.Price,
-                    Qty = orderModel.Qty
+                    Price = orderModel.OrderItems.Sum(o=>o.Price),
+                    Qty = orderModel.OrderItems.Sum(o=>o.Qty)
 
                 };
 
                 var addedOrder = await this.salesManagementDbContext.Orders.AddAsync(order);
+                await this.salesManagementDbContext.SaveChangesAsync();
                 int orderId = addedOrder.Entity.Id;
 
+                var orderItemsToAdd = ReturnOrderItemsWithOrderId(orderId, orderModel.OrderItems);
+                this.salesManagementDbContext.AddRange(orderItemsToAdd);
+                await this.salesManagementDbContext.SaveChangesAsync();
             }
             catch (Exception)
             {
