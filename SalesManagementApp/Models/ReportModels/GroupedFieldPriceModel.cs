@@ -2,7 +2,7 @@
 {
     public class GroupedFieldPriceModel
     {
-        public string GroupFieldKey { get; set; }
+        public string GroupedFieldKey { get; set; }
         public decimal Price { get; set; }
 
     }

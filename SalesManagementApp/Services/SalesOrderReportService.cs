@@ -27,7 +27,7 @@ namespace SalesManagementApp.Services
                                         orderby GroupedData.Key
                                         select new GroupedFieldPriceModel
                                         { 
-                                         GroupFieldKey=(
+                                         GroupedFieldKey=(
                                             GroupedData.Key == 1 ? "Jan":
                                             GroupedData.Key == 2 ? "Feb":
                                             GroupedData.Key == 3? "Mar":
