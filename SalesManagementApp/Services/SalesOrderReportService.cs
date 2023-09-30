@@ -52,5 +52,26 @@ namespace SalesManagementApp.Services
                 throw;
             }
         }
+
+        public async Task<List<GroupedFieldQtyModel>> GetQtyPerProductCategory()
+        {
+            try
+            {
+                var reportData = await (from s in this.salesManagementDbContext.SalesOrderReports
+                                        group s by s.ProductCategoryName into GroupedData
+                                        orderby GroupedData.Key
+                                        select new GroupedFieldQtyModel
+                                        {
+                                            GroupedFieldKey = GroupedData.Key,
+                                            Qty = GroupedData.Sum(oi => oi.OrderItemQty)
+                                        }).ToListAsync();
+                return reportData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
