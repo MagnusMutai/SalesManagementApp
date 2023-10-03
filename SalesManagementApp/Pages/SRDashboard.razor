@@ -5,6 +5,7 @@
 @using System.Timers
 @inject NavigationManager NavigationManager
 @inject ISalesOrderReportService SalesOrderReportService
+
 <style>
     .e-dashboardlayout {
         padding: 20px;
@@ -165,8 +166,8 @@
     {
         if (chart1 == null && chart2 == null)
             return;
-        chart1.Refresh(false);
-        chart2.Refresh(false);
+        chart1.RefreshAsync(false);
+        chart2.RefreshAsync(false);
         timer.Enabled = false;
         timer.AutoReset = false;
     }
