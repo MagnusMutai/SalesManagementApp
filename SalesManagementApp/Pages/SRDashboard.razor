@@ -47,9 +47,9 @@
     }
 </style>
 <div class="control-section">
-    <SfDashboardLayout CellSpacing="@(new double[]{15 ,15 })" CellAspectRatio="0.8" Columns="8">
+    <SfDashboardLayout @ref="sfDashboardLayout" CellSpacing="@(new double[]{15 ,15 })" CellAspectRatio="0.8" Columns="8">
         <DashboardLayoutPanels>
-            <DashboardLayoutEvents Created="LayoutCreated"></DashboardLayoutEvents>
+            <DashboardLayoutEvents Created="LayoutCreated" OnWindowResize="OnWindowResize"></DashboardLayoutEvents>
             <DashboardLayoutPanel Column="0" Row="0" SizeX="4" SizeY="2">
                 <HeaderTemplate>
                     <span class="title">Sales Rep - Sales Gross / Month</span>
@@ -150,6 +150,8 @@
     private static Timer timer;
     SfChart chart1;
     SfChart chart2;
+    SfDashboardLayout sfDashboardLayout;
+    DateTime previousRequestTime = DateTime.MinValue;
     private string[] palettes = new string[] { "#61EFCD", "#CDDE1F", "#FEC200", "#CA765A", "#2485FA", "#F57D7D", "#C152D2",
     "#8854D9", "#3D4EB8", "#00BCD7","#4472c4", "#ed7d31", "#ffc000", "#70ad47", "#5b9bd5", "#c1c1c1", "#6f6fe2", "#e269ae", "#9e480e", "#997300" };
     private string annotationFontColor;
@@ -161,6 +163,17 @@
         timer.Elapsed += RefreshCharts;
         timer.AutoReset = true;
         timer.Enabled = true;
+    }
+    //Window Resize
+    private async Task OnWindowResize(Syncfusion.Blazor.Layouts.ResizeArgs args)
+    {
+        const int UPDATETHRESHOLD = 200;
+        if ((previousRequestTime == DateTime.MinValue || (DateTime.Now - previousRequestTime).TotalMilliseconds > UPDATETHRESHOLD))
+        {
+            previousRequestTime = DateTime.Now;
+            await Task.Delay(UPDATETHRESHOLD);
+            await sfDashboardLayout.RefreshAsync();
+        }
     }
     private void RefreshCharts(Object source, ElapsedEventArgs e)
     {
