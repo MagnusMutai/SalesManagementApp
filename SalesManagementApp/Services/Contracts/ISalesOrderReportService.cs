@@ -11,5 +11,7 @@ namespace SalesManagementApp.Services.Contracts
 
         //TL
         Task<List<GroupedFieldPriceModel>> GetGrossSalesPerTeamMemberData();
+        Task<List<GroupedFieldQtyModel>> GetQtyPerTeamMemberData();
+        Task<List<GroupedFieldQtyModel>> GetTeamQtyPerMonthData();
     }
 }
