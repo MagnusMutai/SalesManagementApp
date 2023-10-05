@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\TLDashboard.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -28,18 +24,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\Images\Products\" />
     <Folder Include="wwwroot\Images\Profile\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\TLDashboard.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\TLDashboard.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\TLDashboard.razor" />
   </ItemGroup>
 
 </Project>
