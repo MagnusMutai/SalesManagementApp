@@ -169,6 +169,7 @@ namespace SalesManagementApp.Services
             {
                 List<int> teamMemberIds = await GetTeamMemberIds(3);
                 var reportData = await(from s in this.salesManagementDbContext.SalesOrderReports
+                                       where s.EmployeeId == 9
                                        group s by s.OrderDateTime.Month into GroupedData
                                        orderby GroupedData.Key
                                        select new GroupedFieldQtyModel
