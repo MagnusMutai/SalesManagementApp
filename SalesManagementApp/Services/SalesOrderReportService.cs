@@ -256,29 +256,30 @@ namespace SalesManagementApp.Services
             try
             {
                 var reportData = await (from s in this.salesManagementDbContext.SalesOrderReports
+                                        where s.OrderDateTime.Year == DateTime.Now.Year
                                         group s by s.OrderDateTime.Month into GroupedData
                                         orderby GroupedData.Key
                                         select new MonthLocationModel
                                         {
-                                         Month = (
-                                           GroupedData.Key == 1 ? "Jan" :
-                                           GroupedData.Key == 2 ? "Feb" :
-                                           GroupedData.Key == 3 ? "Mar" :
-                                           GroupedData.Key == 4 ? "Apr" :
-                                           GroupedData.Key == 5 ? "May" :
-                                           GroupedData.Key == 6 ? "Jun" :
-                                           GroupedData.Key == 7 ? "Jul" :
-                                           GroupedData.Key == 8 ? "Aug" :
-                                           GroupedData.Key == 9 ? "Sep" :
-                                           GroupedData.Key == 10 ? "Oct" :
-                                           GroupedData.Key == 11 ? "Nov" :
-                                           GroupedData.Key == 12 ? "Dec" :
-                                           ""
+                                            Month = (
+                                               GroupedData.Key == 1 ? "Jan" :
+                                               GroupedData.Key == 2 ? "Feb" :
+                                               GroupedData.Key == 3 ? "Mar" :
+                                               GroupedData.Key == 4 ? "Apr" :
+                                               GroupedData.Key == 5 ? "May" :
+                                               GroupedData.Key == 6 ? "Jun" :
+                                               GroupedData.Key == 7 ? "Jul" :
+                                               GroupedData.Key == 8 ? "Aug" :
+                                               GroupedData.Key == 9 ? "Sep" :
+                                               GroupedData.Key == 10 ? "Oct" :
+                                               GroupedData.Key == 11 ? "Nov" :
+                                               GroupedData.Key == 12 ? "Dec" :
+                                               ""
                                            ),
-                                            TX = GroupedData.Where(1 => 1.RetailOutletLocation == "TX").Sum(o => o.OrderItemQty),
-                                            CA = GroupedData.Where(1 => 1.RetailOutletLocation == "CA").Sum(o => o.OrderItemQty),
-                                            NY = GroupedData.Where(1 => 1.RetailOutletLocation == "NY").Sum(o => o.OrderItemQty),
-                                            WA = GroupedData.Where(1 => 1.RetailOutletLocation == "WA").Sum(o => o.OrderItemQty)
+                                            TX = GroupedData.Where(l => l.RetailOutletLocation == "TX").Sum(o => o.OrderItemQty),
+                                            CA = GroupedData.Where(l => l.RetailOutletLocation == "CA").Sum(o => o.OrderItemQty),
+                                            NY = GroupedData.Where(l => l.RetailOutletLocation == "NY").Sum(o => o.OrderItemQty),
+                                            WA = GroupedData.Where(l => l.RetailOutletLocation == "WA").Sum(o => o.OrderItemQty)
                                         }).ToListAsync();
                 return reportData;
             }
