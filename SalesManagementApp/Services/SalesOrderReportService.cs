@@ -169,7 +169,8 @@ namespace SalesManagementApp.Services
             {
                 List<int> teamMemberIds = await GetTeamMemberIds(3);
                 var reportData = await(from s in this.salesManagementDbContext.SalesOrderReports
-                                       where s.EmployeeId == 9
+                                           //where s.EmployeeId == 9
+                                       where teamMemberIds.Contains(s.EmployeeId) && s.OrderDateTime.Year == DateTime.Now.Year
                                        group s by s.OrderDateTime.Month into GroupedData
                                        orderby GroupedData.Key
                                        select new GroupedFieldQtyModel
@@ -201,10 +202,10 @@ namespace SalesManagementApp.Services
         }
         private async Task<List<int>> GetTeamMemberIds(int teamLeadId)
         {
-            List<int> teamMembersIds = await this.salesManagementDbContext.Employees
+            List<int> teamMemberIds = await this.salesManagementDbContext.Employees
                                        .Where(e => e.ReportToEmpId == teamLeadId)
                                        .Select(e => e.Id).ToListAsync();
-            return teamMembersIds;
+            return teamMemberIds;
         }
 
         
