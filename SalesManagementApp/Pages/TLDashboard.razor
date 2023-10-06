@@ -97,12 +97,12 @@
             </DashboardLayoutPanel>
             <DashboardLayoutPanel Column="0" Row="4" SizeX="8" SizeY="3">
                 <HeaderTemplate>
-                    <span class="title" style="margin-left:40%">Team Member - Sales Qty / Month</span>
+                    <span class="title" style="margin-left:40%">Team Leader - Team Sales Qty / Month</span>
                 </HeaderTemplate>
                 <ContentTemplate>
                     @if (isLayoutRender)
                     {
-                        <SfChart @ref="chart2" Title="Qty / Month">
+                        <SfChart @ref="chart2" Title="Team Qty / Month">
                             <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category">
                             </ChartPrimaryXAxis>
                             <ChartSeriesCollection>
