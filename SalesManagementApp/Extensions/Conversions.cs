@@ -77,5 +77,21 @@ namespace SalesManagementApp.Extensions
 
                           }).ToListAsync();
         }
+        public static async Task<List<OrganisationModel>> ConvertToHierarchy(this IQueryable<Employee> employees, SalesManagementDbContext context)
+        {
+            return await (from e in employees
+                          join t in context.EmployeeJobTitles
+                          on e.EmployeeJobTitleId equals t.EmployeeJobTitleId
+                          orderby e.Id
+                          select new OrganisationModel
+                          {
+                              EmployeeId = e.Id.ToString(),
+                              ReportsToId = e.ReportToEmpId != null?e.ReportToEmpId.ToString():"",
+                              FirstName = e.FirstName,
+                              LastName = e.LastName,
+                              ImagePath = e.ImagePath,
+                              JobTitle = t.Name
+                          }).ToListAsync();
+        }
     }
 }
