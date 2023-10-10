@@ -6,7 +6,7 @@
 
 <div class="col-lg-12 control-section sb-property-border">
     <div class="content-wrapper">
-        <SfDiagramComponent Width="100%" Height="1600px" ConnectorCreating="@OnConnectorCreating" NodeCreating="@OnNodeCreating" InteractionController="@InteractionController.ZoomPan">
+        <SfDiagramComponent Width="100%" Height="1600px" ConnectorCreating="@OnConnectorCreating" NodeCreating="@OnNodeCreating" InteractionController="@DiagramInteractions.ZoomPan">
             <ScrollSettings @bind-ScrollLimit="@scrollLimit"></ScrollSettings>
             <DataSourceSettings ID="EmployeeId" ParentID="ReportsToId" DataSource="@OrganisationData"> </DataSourceSettings>
             <Layout @bind-Type="Type" @bind-HorizontalSpacing="@HorizontalSpacing" @bind-Orientation="@OrientationType" @bind-VerticalSpacing="@VerticalSpacing" @bind-HorizontalAlignment="@HorizontalAlignment" @bind-VerticalAlignment="@VerticalAlignment" GetLayoutInfo="GetLayoutInfo">
@@ -21,8 +21,8 @@
                             string EmpId = (node1.Data as OrganisationModel).EmployeeId;
                             string role = (node1.Data as OrganisationModel).JobTitle;
                             string BgImage = (node1.Data as OrganisationModel).ImagePath;
-                            Syncfusion.Blazor.Diagram.Shapes type = (context as Node).Shape.Type;
-                            if (type == Syncfusion.Blazor.Diagram.Shapes.HTML)
+                            Syncfusion.Blazor.Diagram.NodeShapes type = (context as Node).Shape.Type;
+                            if (type == Syncfusion.Blazor.Diagram.NodeShapes.HTML)
                             {
                                 <div style="position: absolute;
             width: 100%;
@@ -171,7 +171,7 @@
         node.Width = 190;
         node.Height = 104;
         node.Shape = new Shape()
-            { Type = Syncfusion.Blazor.Diagram.Shapes.HTML };
+            { Type = Syncfusion.Blazor.Diagram.NodeShapes.HTML };
     }
     //Update the section to the property panel
     private void UpdateSelection(string id)

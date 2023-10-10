@@ -19,6 +19,7 @@
     <PackageReference Include="Syncfusion.Blazor.Layouts" Version="22.2.12" />
     <PackageReference Include="Syncfusion.Blazor.Lists" Version="22.2.12" />
     <PackageReference Include="Syncfusion.Blazor.Notifications" Version="22.2.12" />
+    <PackageReference Include="Syncfusion.Blazor.Schedule" Version="22.2.12" />
     <PackageReference Include="Syncfusion.Blazor.Themes" Version="22.2.12" />
   </ItemGroup>
 
