@@ -77,6 +77,24 @@ namespace SalesManagementApp.Extensions
 
                           }).ToListAsync();
         }
+        public static Appointment Convert(this AppointmentModel appointmentModel)
+        {
+            return new Appointment
+            {
+                EmployeeId = appointmentModel.EmployeeId,
+                Description = appointmentModel.Description,
+                IsAllDay = appointmentModel.IsAllDay,
+                RecurrenceId = appointmentModel.RecurrenceId,
+                StartTime = appointmentModel.StartTime,
+                EndTime = appointmentModel.EndTime,
+                RecurrenceException = appointmentModel.RecurrenceException,
+                RecurrenceRule = appointmentModel.RecurrenceRule,
+                Location = appointmentModel.Location,
+                Subject = appointmentModel.Subject
+            };
+        }
+
+
         public static async Task<List<OrganisationModel>> ConvertToHierarchy(this IQueryable<Employee> employees, SalesManagementDbContext context)
         {
             return await (from e in employees
@@ -93,5 +111,6 @@ namespace SalesManagementApp.Extensions
                               JobTitle = t.Name
                           }).ToListAsync();
         }
+
     }
 }
