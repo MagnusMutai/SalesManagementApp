@@ -14,11 +14,13 @@ namespace SalesManagementApp.Services
         {
             this.salesManagementDbContext = salesManagementDbContext;
         }
-        public Task AddAppointment(AppointmentModel appointmentModel)
+        public async Task AddAppointment(AppointmentModel appointmentModel)
         {
             try
             {
                 Appointment appointment = appointmentModel.Convert();
+                await this.salesManagementDbContext.AddAsync(appointment);
+                await this.salesManagementDbContext.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -27,19 +29,62 @@ namespace SalesManagementApp.Services
             }
         }
 
-        public Task DeleteAppointment(int id)
+        public async Task DeleteAppointment(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Appointment? appointment = await this.salesManagementDbContext.Appointments.FindAsync(id);
+                if (appointment != null)
+                {
+                    this.salesManagementDbContext.Remove(appointment);
+                    await this.salesManagementDbContext.SaveChangesAsync();
+
+                }
+             }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task<List<AppointmentModel>> GetAppointments()
+        public async Task<List<AppointmentModel>> GetAppointments()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await this.salesManagementDbContext.Appointments.Where(e => e.EmployeeId == 9).Convert();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public Task UpdateAppointment(AppointmentModel appointmentModel)
+        public async Task UpdateAppointment(AppointmentModel appointmentModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Appointment? appointment = await this.salesManagementDbContext.Appointments.FindAsync(appointmentModel.Id);
+                if(appointment != null)
+                {
+                    appointment.Description = appointmentModel.Description;
+                    appointment.IsAllDay = appointmentModel.IsAllDay;
+                    appointment.RecurrenceId = appointmentModel.RecurrenceId;
+                    appointment.RecurrenceException = appointmentModel.RecurrenceException;
+                    appointment.StartTime = appointmentModel.StartTime;
+                    appointment.EndTime = appointmentModel.EndTime;
+                    appointment.Location = appointmentModel.Location;
+                    appointment.Subject = appointmentModel.Subject;
+
+                    await salesManagementDbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
