@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SalesManagementApp.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SalesManagementApp.Data
 {
-    public class SalesManagementDbContext:DbContext
+    public class SalesManagementDbContext:IdentityDbContext<IdentityUser>
     {
         public SalesManagementDbContext(DbContextOptions<SalesManagementDbContext>options):base(options)
         {

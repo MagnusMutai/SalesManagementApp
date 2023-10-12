@@ -94,27 +94,26 @@ namespace SalesManagementApp.Extensions
             };
         }
 
-        public static async Task <List<AppointmentModel>> Convert(this IQueryable<Appointment> appointments)
-        {
-            return await (from a in appointments
-                          select new AppointmentModel
-                          {
-                              Id = a.Id,
-                              EmployeeId = a.EmployeeId,
-                              Description = a.Description,
-                              IsAllDay = a.IsAllDay,
-                              RecurrenceId = a.RecurrenceId,
-                              StartTime = a.StartTime,
-                              EndTime = a.EndTime,
-                              RecurrenceException = a.RecurrenceException,
-                              RecurrenceRule = a.RecurrenceRule,
-                              Location = a.Location,
-                              Subject = a.Subject
-                          }).ToListAsync();
-        }
+            public static async Task<List<AppointmentModel>> Convert(this IQueryable<Appointment> appointments)
+            {
+                return await (from a in appointments
+                              select new AppointmentModel
+                              {
+                                  Id = a.Id,
+                                  EmployeeId = a.EmployeeId,
+                                  Description = a.Description,
+                                  IsAllDay = a.IsAllDay,
+                                  RecurrenceId = a.RecurrenceId,
+                                  StartTime = a.StartTime,
+                                  EndTime = a.EndTime,
+                                  RecurrenceException = a.RecurrenceException,
+                                  RecurrenceRule = a.RecurrenceRule,
+                                  Location = a.Location,
+                                  Subject = a.Subject
+                              }).ToListAsync();
+            }
 
-
-        public static async Task<List<OrganisationModel>> ConvertToHierarchy(this IQueryable<Employee> employees, SalesManagementDbContext context)
+                public static async Task<List<OrganisationModel>> ConvertToHierarchy(this IQueryable<Employee> employees, SalesManagementDbContext context)
         {
             return await (from e in employees
                           join t in context.EmployeeJobTitles
