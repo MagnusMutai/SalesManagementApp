@@ -5,6 +5,7 @@ using SalesManagementApp.Data;
 using SalesManagementApp.Services;
 using SalesManagementApp.Services.Contracts;
 using Syncfusion.Blazor;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("SalesManagementDbConnection")
@@ -12,6 +13,10 @@ var connectionString = builder.Configuration.GetConnectionString("SalesManagemen
 
 builder.Services.AddDbContext<SalesManagementDbContext>(
     options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<SalesManagementDbContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -46,6 +51,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

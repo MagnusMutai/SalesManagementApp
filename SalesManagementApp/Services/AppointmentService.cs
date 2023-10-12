@@ -18,6 +18,7 @@ namespace SalesManagementApp.Services
         {
             try
             {
+
                 Appointment appointment = appointmentModel.Convert();
                 await this.salesManagementDbContext.AddAsync(appointment);
                 await this.salesManagementDbContext.SaveChangesAsync();
@@ -34,13 +35,13 @@ namespace SalesManagementApp.Services
             try
             {
                 Appointment? appointment = await this.salesManagementDbContext.Appointments.FindAsync(id);
+
                 if (appointment != null)
                 {
                     this.salesManagementDbContext.Remove(appointment);
                     await this.salesManagementDbContext.SaveChangesAsync();
-
                 }
-             }
+            }
             catch (Exception)
             {
 
@@ -66,11 +67,12 @@ namespace SalesManagementApp.Services
             try
             {
                 Appointment? appointment = await this.salesManagementDbContext.Appointments.FindAsync(appointmentModel.Id);
-                if(appointment != null)
+                if (appointment != null)
                 {
                     appointment.Description = appointmentModel.Description;
                     appointment.IsAllDay = appointmentModel.IsAllDay;
                     appointment.RecurrenceId = appointmentModel.RecurrenceId;
+                    appointment.RecurrenceRule = appointmentModel.RecurrenceRule;
                     appointment.RecurrenceException = appointmentModel.RecurrenceException;
                     appointment.StartTime = appointmentModel.StartTime;
                     appointment.EndTime = appointmentModel.EndTime;
