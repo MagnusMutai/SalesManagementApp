@@ -2,7 +2,7 @@
 {
     public class TokenProvider
     {
-        public string Xsrf { get; set; }
+        public string XsrfToken { get; set; }
         public string RefreshToken { get; set; }
     }
 }
