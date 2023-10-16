@@ -81,7 +81,7 @@ namespace SalesManagementApp.Extensions
         {
             return new Appointment
             {
-                EmployeeId = 9,
+                EmployeeId = appointmentModel.EmployeeId,
                 Description = appointmentModel.Description,
                 IsAllDay = appointmentModel.IsAllDay,
                 RecurrenceId = appointmentModel.RecurrenceId,
@@ -128,6 +128,12 @@ namespace SalesManagementApp.Extensions
                               ImagePath = e.ImagePath,
                               JobTitle = t.Name
                           }).ToListAsync();
+        }
+        public static async Task<Employee> GetEmployeeObject(this System.Security.Claims.ClaimsPrincipal user, SalesManagementDbContext context)
+        {
+           var emailAddress = user.Identity.Name;
+            var employee = await context.Employees.Where(e => e.Email.ToLower() == emailAddress.ToLower()).SingleOrDefaultAsync();
+            return employee;
         }
 
     }
