@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">SalesManagementApp</a>
+       <a class="navbar-brand" href=""><img src="/Images/Oexl.png" style="height:40px" class="img-fluid"/>Just In Time Retail</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,67 +9,60 @@
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
+        <div class="nav-tem px-3 d-sm-none">
+            <LoginDisplay></LoginDisplay>
+        </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
         <AuthorizeView Roles="Admin, SM ">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="/Admin">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Admin  
+                <i class="fa fa-users"></i>&nbsp;&nbsp;Admin  
             </NavLink>
         </div>
         </AuthorizeView>
-        <AuthorizeView Roles="SR">
+        <AuthorizeView Roles="SR, SM, TL">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="ProductCatalog">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Products
+                    <i class="fa fa-credit-card-alt"></i>&nbsp;&nbsp;Products
             </NavLink>
         </div>
         </AuthorizeView>
-        <AuthorizeView Roles="SR">
+        <AuthorizeView Roles="SR, SM, TL">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="SRDashboard">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> SRDashboard
+                    <i class="fa fa-pie-chart"></i>&nbsp;&nbsp;Dashboard
             </NavLink>
         </div>
         </AuthorizeView>
-        <AuthorizeView Roles="TL">
+        <AuthorizeView Roles="TL, SM, ">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="TLDashboard">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> TLDashboard
+                    <i class="fa fa-pie-chart"></i>&nbsp;&nbsp;Dashboard
             </NavLink>
         </div>
         </AuthorizeView>
         <AuthorizeView Roles="SM">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="SMDashboard">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> SMDashboard
+                    <i class="fa fa-pie-chart"></i>&nbsp;&nbsp;Dashboard
             </NavLink>
         </div>
         </AuthorizeView>
         <AuthorizeView Roles="SM">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="Organisation">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Organisation
+                    <i class="fa fa-sitemap"></i>&nbsp;&nbsp;Organisation
             </NavLink>
         </div>
         </AuthorizeView>
         <AuthorizeView Roles="SM, TL, SR">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="Appointments">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Appointments
+                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;Appointments
             </NavLink>
         </div>
         </AuthorizeView>
