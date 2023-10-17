@@ -3,7 +3,7 @@
 <AuthorizeView>
     <Authorized>
         <a class="nav nav-link" href="Identity/Account/Manage/Index">
-            Hello!
+            Hello, @context.User.Identity.Name!
         </a>
         <form action="/Identity/Account/Logout?returnUrl=%2f" method="post">
             <button class="btn btn-outline-info">Logout</button>

@@ -2,7 +2,6 @@
 using SalesManagementApp.Data;
 using SalesManagementApp.Entities;
 using SalesManagementApp.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SalesManagementApp.Extensions
 {
@@ -24,7 +23,6 @@ namespace SalesManagementApp.Extensions
                               ImagePath = e.ImagePath
                           }).ToListAsync();
         }
-        
         public static Employee Convert(this EmployeeModel employeeModel)
         {
             return new Employee
@@ -33,13 +31,14 @@ namespace SalesManagementApp.Extensions
                 LastName = employeeModel.LastName,
                 EmployeeJobTitleId = employeeModel.EmployeeJobTitleId,
                 Email = employeeModel.Email,
-                DateOfBirth= employeeModel.DateOfBirth,
-                ReportToEmpId= employeeModel.ReportToEmpId,
-                Gender= employeeModel.Gender,
-                ImagePath= employeeModel.Gender.ToUpper()== "MALE"?"/IMAGES/Profile/MaleDefault.jpg"
-                                                                  :"/IMAGES/Profile/FemaleDefault.jpg"
+                DateOfBirth = employeeModel.DateOfBirth,
+                ReportToEmpId = employeeModel.ReportToEmpId,
+                Gender = employeeModel.Gender,
+                ImagePath = employeeModel.Gender.ToUpper() == "MALE" ? "/Images/Profile/MaleDefault.jpg"
+                                                                    : "/Images/Profile/FemaleDefault.jpg"
             };
         }
+
         public static async Task<List<ProductModel>> Convert(this IQueryable<Product> Products,
                                                              SalesManagementDbContext context)
         {
@@ -55,6 +54,7 @@ namespace SalesManagementApp.Extensions
                               Price = prod.Price,
                               CategoryId = prod.CategoryId,
                               CategoryName = prodCat.Name
+
                           }).ToListAsync();
         }
         public static async Task<List<ClientModel>> Convert(this IQueryable<Client> clients,
@@ -92,28 +92,28 @@ namespace SalesManagementApp.Extensions
                 Location = appointmentModel.Location,
                 Subject = appointmentModel.Subject
             };
+
         }
+        public static async Task<List<AppointmentModel>> Convert(this IQueryable<Appointment> appointments)
+        {
+            return await (from a in appointments
+                          select new AppointmentModel
+                          {
+                              Id = a.Id,
+                              EmployeeId = a.EmployeeId,
+                              Description = a.Description,
+                              IsAllDay = a.IsAllDay,
+                              RecurrenceId = a.RecurrenceId,
+                              StartTime = a.StartTime,
+                              EndTime = a.EndTime,
+                              RecurrenceException = a.RecurrenceException,
+                              RecurrenceRule = a.RecurrenceRule,
+                              Location = a.Location,
+                              Subject = a.Subject
+                          }).ToListAsync();
 
-            public static async Task<List<AppointmentModel>> Convert(this IQueryable<Appointment> appointments)
-            {
-                return await (from a in appointments
-                              select new AppointmentModel
-                              {
-                                  Id = a.Id,
-                                  EmployeeId = a.EmployeeId,
-                                  Description = a.Description,
-                                  IsAllDay = a.IsAllDay,
-                                  RecurrenceId = a.RecurrenceId,
-                                  StartTime = a.StartTime,
-                                  EndTime = a.EndTime,
-                                  RecurrenceException = a.RecurrenceException,
-                                  RecurrenceRule = a.RecurrenceRule,
-                                  Location = a.Location,
-                                  Subject = a.Subject
-                              }).ToListAsync();
-            }
-
-                public static async Task<List<OrganisationModel>> ConvertToHierarchy(this IQueryable<Employee> employees, SalesManagementDbContext context)
+        }
+        public static async Task<List<OrganisationModel>> ConvertToHierarchy(this IQueryable<Employee> employees, SalesManagementDbContext context)
         {
             return await (from e in employees
                           join t in context.EmployeeJobTitles
@@ -122,16 +122,18 @@ namespace SalesManagementApp.Extensions
                           select new OrganisationModel
                           {
                               EmployeeId = e.Id.ToString(),
-                              ReportsToId = e.ReportToEmpId != null?e.ReportToEmpId.ToString():"",
+                              ReportsToId = e.ReportToEmpId != null ? e.ReportToEmpId.ToString() : "",
+                              Email = e.Email,
                               FirstName = e.FirstName,
                               LastName = e.LastName,
                               ImagePath = e.ImagePath,
                               JobTitle = t.Name
+
                           }).ToListAsync();
         }
         public static async Task<Employee> GetEmployeeObject(this System.Security.Claims.ClaimsPrincipal user, SalesManagementDbContext context)
         {
-           var emailAddress = user.Identity.Name;
+            var emailAddress = user.Identity.Name;
             var employee = await context.Employees.Where(e => e.Email.ToLower() == emailAddress.ToLower()).SingleOrDefaultAsync();
             return employee;
         }
