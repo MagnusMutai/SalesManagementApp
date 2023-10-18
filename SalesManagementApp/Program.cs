@@ -21,8 +21,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
-
 builder.Services.AddSyncfusionBlazor();
 
 builder.Services.AddScoped<IEmployeeManagementService, EmployeeManagementService>();
