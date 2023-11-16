@@ -19,6 +19,7 @@ namespace SalesManagementApp.Data
             SeedData.AddClientData(modelBuilder);   
                 
         }
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeJobTitle> EmployeeJobTitles { get; set; }
         public DbSet<Product> Products { get; set; }
