@@ -4,6 +4,7 @@ using SalesManagementApp.Entities;
 using SalesManagementApp.Extensions;
 using SalesManagementApp.Models;
 using SalesManagementApp.Services.Contracts;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
 namespace SalesManagementApp.Services

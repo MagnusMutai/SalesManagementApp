@@ -11,5 +11,6 @@ namespace SalesManagementApp.Services.Contracts
         Task<Employee> AddEmployee (EmployeeModel employeeModel);
         Task UpdateEmployee (EmployeeModel employeeModel);
         Task DeleteEmployee (int id);
+       
     }
 }
